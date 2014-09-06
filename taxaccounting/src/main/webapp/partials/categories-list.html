@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+
+	<div class="panel-heading">Category List</div>
+	<div class="panel-body">
+		<p>...</p>
+	</div>
+
+	<table class="table">
+		<tr>
+			<th>Name</th>
+			<th>Delete</th>
+		</tr>
+
+		<tr ng-repeat="category in categories._embedded.categories">
+			<td><a
+				href="http://localhost:8080/#/app/categories/{{category.categoryId}}">{{category.name}}</a></td>
+			<td><button type="button" class="btn btn-danger"
+					ng-click="deleteCategory(category.categoryId)">Delete</button></td>
+		</tr>
+	</table>
+	<br />
+
+	<button type="button" class="btn btn-primary"
+		ng-click="createCategoryView()">Create New Category</button>
+
+</div>

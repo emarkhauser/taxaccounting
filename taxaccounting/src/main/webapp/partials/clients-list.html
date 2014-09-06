@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+
+	<div class="panel-heading">Client List</div>
+	<div class="panel-body">
+		<p>...</p>
+	</div>
+
+	<table class="table">
+		<tr>
+			<th>Name</th>
+			<th>Delete</th>
+		</tr>
+
+		<tr ng-repeat="client in clients._embedded.clients">
+			<td><a
+				href="http://localhost:8080/#/app/clients/{{client.clientId}}">{{client.name}}</a></td>
+			<td><button type="button" class="btn btn-danger"
+					ng-click="deleteClient(client.clientId)">Delete</button></td>
+		</tr>
+	</table>
+	<br />
+
+	<button type="button" class="btn btn-primary"
+		ng-click="createClientView()">Create New Client</button>
+
+</div>

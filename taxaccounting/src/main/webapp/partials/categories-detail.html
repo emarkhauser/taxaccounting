@@ -1,0 +1,13 @@
+<h2>Category Details</h2>
+
+<form role="form">
+
+<div class="form-group">
+    <label class="control-label" for="name">Name:</label>
+    <input type="text" id="name" class="form-control" placeholder="Enter name"
+				ng-model="category.name" />
+  </div>
+
+	<button type="submit" class="btn btn-primary" ng-click="updateCategory(category.categoryId)">Update category</button>
+	<button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+</form>

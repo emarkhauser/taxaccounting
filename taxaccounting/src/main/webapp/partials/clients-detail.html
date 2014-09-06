@@ -1,0 +1,13 @@
+<h2>Client Details</h2>
+
+<form role="form">
+
+<div class="form-group">
+    <label class="control-label" for="name">Name:</label>
+    <input type="text" id="name" class="form-control" placeholder="Enter name"
+				ng-model="client.name" />
+  </div>
+
+	<button type="submit" class="btn btn-primary" ng-click="updateClient(client.clientId)">Update client</button>
+	<button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+</form>
