@@ -1,1 +1,39 @@
-Not implemented yet
+<div class="panel panel-default">
+
+	<div class="panel-heading">Income List</div>
+	<div class="panel-body">
+		<p>...</p>
+	</div>
+
+	<table class="table">
+		<tr>
+			<th>cashSales</th>
+			<th>salesReturns</th>
+			<th>totalSales</th>
+			<th>paymentOnAccount</th>
+			<th>client</th>
+			<th>calendar</th>
+			<th>particulars</th>
+			<th>hst</th>
+			<th>Delete</th>
+		</tr>
+
+		<tr ng-repeat="income in incomes._embedded.incomes">
+			<td>{{income.cashSales}}</td>
+			<td>{{income.salesReturns}}</td>
+			<td>{{income.totalSales}}</td>
+			<td>{{income.paymentOnAccount}}</td>
+			<td>{{income.client}}</td>
+			<td>{{income.calendar}}</td>
+			<td>{{income.particulars}}</td>
+			<td>{{income.hst}}</td>
+			<td><button type="button" class="btn btn-danger"
+					ng-click="deleteIncome(income.incomeId)">Delete</button></td>
+		</tr>
+	</table>
+	<br />
+
+	<button type="button" class="btn btn-primary"
+		ng-click="createIncomeView()">Create New Income</button>
+
+</div>

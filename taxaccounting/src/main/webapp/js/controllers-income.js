@@ -15,11 +15,11 @@ controllers.controller('IncomeListCtrl', [ '$scope', 'Incomes', 'Income',
 			};
 
 			$scope.createIncomeView = function() {
-				$location.path('/app/Incomes-create');
+				$location.path('/app/incomes-create');
 			};
 			
 			$scope.showIncomeView = function() {
-				$location.path('/app/Incomes-create');
+				$location.path('/app/incomes-create');
 			};
 
 		} ]);

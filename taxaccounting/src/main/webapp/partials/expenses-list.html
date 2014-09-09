@@ -1,1 +1,35 @@
-Not implemented yet
+<div class="panel panel-default">
+
+	<div class="panel-heading">Expense List</div>
+	<div class="panel-body">
+		<p>...</p>
+	</div>
+	
+	<table class="table">
+		<tr>
+			<th>amount</th>
+			<th>category</th>
+			<th>note</th>
+			<th>calendar</th>
+			<th>particulars</th>
+			<th>hst</th>
+			<th>Delete</th>
+		</tr>
+
+		<tr ng-repeat="expense in expenses._embedded.expenses">
+			<td>{{expense.amount}}</td>
+			<td>{{expense.category}}</td>
+			<td>{{expense.note}}</td>
+			<td>{{expense.calendar}}</td>
+			<td>{{expense.particulars}}</td>
+			<td>{{expense.hst}}</td>
+			<td><button type="button" class="btn btn-danger"
+					ng-click="deleteExpense(expense.expenseId)">Delete</button></td>
+		</tr>
+	</table>
+	<br />
+
+	<button type="button" class="btn btn-primary"
+		ng-click="createExpenseView()">Create New Expense</button>
+
+</div>
