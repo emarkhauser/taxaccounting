@@ -42,8 +42,10 @@ controllers.controller('IncomeDetailCtrl', [ '$scope', '$routeParams', '$locatio
 			
 		} ]);
 
-controllers.controller('IncomeCreateCtrl', [ '$scope', 'Incomes', '$location',
-		function($scope, Incomes, $location) {
+controllers.controller('IncomeCreateCtrl', [ '$scope', 'Incomes', 'Clients', '$location',
+		function($scope, Incomes, Clients, $location) {
+	
+		    $scope.clients = Clients.query();
 	
 			$scope.createIncome = function() {
 				Incomes.create($scope.income);

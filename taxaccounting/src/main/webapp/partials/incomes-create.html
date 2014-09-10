@@ -24,9 +24,9 @@
 			ng-model="income.paymentOnAccount" /> 
 			
 		<label class="control-label"
-			for="name">client:</label> <input type="text" id="client"
-			class="form-control" placeholder="Enter client"
-			ng-model="income.client" /> 
+			for="name">client:</label>
+		<select id="client" class="form-control" ng-model="income.client" 
+			ng-options="client.name for client in clients._embedded.clients"></select>
 			
 		<label class="control-label"
 			for="calendar">calendar:</label> <input type="text" id="calendar"
