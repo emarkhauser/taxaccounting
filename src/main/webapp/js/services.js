@@ -1,6 +1,38 @@
 var phonecatServices = angular.module('services', [ 'ngResource' ]);
 
-/* Clients */
+/* http://www.masnun.com/2013/08/28/rest-access-in-angularjs-using-ngresource.html */
+
+phonecatServices.factory('RestServices', [ '$resource', function($resource) {
+	return $resource('/:restUrl', {restUrl:"@restUrl"}, {
+		query : {
+			method : 'GET',
+			isArray : false,
+		},
+		create : {
+			method : 'POST'
+		}
+	});
+} ]);
+
+phonecatServices.factory('RestService', [ '$resource', function($resource) {
+	return $resource('http://localhost:8080/:restUrl/:id', {restUrl:"@restUrl"}, {
+		show : {
+			method : 'GET',
+			isArray : false
+		},
+		update : {
+			method : 'PUT',
+			params : {
+				id : '@id'
+			}
+		},
+		remove : {
+			method : 'DELETE'
+		}
+	});
+} ]);
+
+/* Clients 
 
 phonecatServices.factory('Clients', [ '$resource', function($resource) {
 	return $resource('http://localhost:8080/clients', {}, {
@@ -32,7 +64,7 @@ phonecatServices.factory('Client', [ '$resource', function($resource) {
 	});
 } ]);
 
-/* Categories */
+/* Categories 
 
 phonecatServices.factory('Categories', [ '$resource', function($resource) {
 	return $resource('http://localhost:8080/categories', {}, {
@@ -64,7 +96,7 @@ phonecatServices.factory('Category', [ '$resource', function($resource) {
 	});
 } ]);
 
-/* Expenses */
+/* Expenses 
 
 phonecatServices.factory('Expenses', [ '$resource', function($resource) {
 	return $resource('http://localhost:8080/expenses', {}, {
@@ -96,7 +128,7 @@ phonecatServices.factory('Expense', [ '$resource', function($resource) {
 	});
 } ]);
 
-/* Income */
+/* Income 
 
 phonecatServices.factory('Incomes', [ '$resource', function($resource) {
 	return $resource('http://localhost:8080/incomes', {}, {
@@ -126,4 +158,4 @@ phonecatServices.factory('Income', [ '$resource', function($resource) {
 			method : 'DELETE'
 		}
 	});
-} ]);
+} ]); */
