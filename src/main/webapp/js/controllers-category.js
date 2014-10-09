@@ -1,32 +1,40 @@
 var controllers = angular.module('controllers-category', []);
 
-controllers.controller('CategoryListCtrl', [ '$scope', 'RestServices',
+//Works
+controllers.controller('CategoryListCtrl', [ '$scope', 
 		'RestService', '$location',
-		function($scope, RestServices, RestService, $location) {
-
-			$scope.categories = RestServices.query({
-				'restUrl' : 'categories'
-			});
+		function($scope, RestService, $location) {
+	
+			restUrl = {'restUrl' : 'categories'};
+			
+			function entityView() {
+				return $location.path('/app/categories-create');
+			}
+	
+			// Query
+			function query_all() {
+				return RestService.query(restUrl);
+			}
+	
+			$scope.categories = query_all();
 
 			$scope.updateCategoryView = function(id) {
 				$location.path('/app/categories/' + id);
 			};
-
-			$scope.deleteCategory = function(categoryId) {
-				RestService.remove({
-					'restUrl' : 'categories'
-				}, {
-					id : categoryId
+			
+			$scope.deleteCategory = function(id) {
+				RestService.remove(restUrl, {
+					id : id
 				});
-				$scope.Categories = RestServices.query();
+				$scope.categories = query_all();
 			};
 
 			$scope.createCategoryView = function() {
-				$location.path('/app/categories-create');
+				entityView();
 			};
 
-			$scope.showClientView = function() {
-				$location.path('/app/categories-create');
+			$scope.showCategoryView = function() {
+				entityView();
 			};
 
 		} ]);
@@ -35,7 +43,7 @@ controllers.controller('CategoryDetailCtrl', [ '$scope', '$routeParams',
 		'$location', 'RestService',
 		function($scope, $routeParams, $location, RestService) {
 
-			$scope.category = RestService.show({
+			$scope.category = RestService.get({
 				id : $routeParams.categoryId
 			});
 

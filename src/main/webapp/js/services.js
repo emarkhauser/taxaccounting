@@ -2,160 +2,142 @@ var phonecatServices = angular.module('services', [ 'ngResource' ]);
 
 /* http://www.masnun.com/2013/08/28/rest-access-in-angularjs-using-ngresource.html */
 
-phonecatServices.factory('RestServices', [ '$resource', function($resource) {
-	return $resource('/:restUrl', {restUrl:"@restUrl"}, {
+phonecatServices.factory('RestService', [ '$resource', function($resource) {
+	return $resource('http://localhost:8080/:restUrl/:id', {
+		restUrl : "@restUrl",
+		id : '@id'
+	}, {
 		query : {
 			method : 'GET',
 			isArray : false,
-		},
-		create : {
-			method : 'POST'
-		}
-	});
-} ]);
-
-phonecatServices.factory('RestService', [ '$resource', function($resource) {
-	return $resource('http://localhost:8080/:restUrl/:id', {restUrl:"@restUrl"}, {
-		show : {
-			method : 'GET',
-			isArray : false
-		},
-		update : {
-			method : 'PUT',
-			params : {
-				id : '@id'
-			}
-		},
-		remove : {
-			method : 'DELETE'
 		}
 	});
 } ]);
 
 /* Clients 
 
-phonecatServices.factory('Clients', [ '$resource', function($resource) {
-	return $resource('http://localhost:8080/clients', {}, {
-		query : {
-			method : 'GET',
-			isArray : false,
-		},
-		create : {
-			method : 'POST'
-		}
-	});
-} ]);
+ phonecatServices.factory('Clients', [ '$resource', function($resource) {
+ return $resource('http://localhost:8080/clients', {}, {
+ query : {
+ method : 'GET',
+ isArray : false,
+ },
+ create : {
+ method : 'POST'
+ }
+ });
+ } ]);
 
-phonecatServices.factory('Client', [ '$resource', function($resource) {
-	return $resource('http://localhost:8080/clients/:clientId', {}, {
-		show : {
-			method : 'GET',
-			isArray : false
-		},
-		update : {
-			method : 'PUT',
-			params : {
-				clientId : '@clientId'
-			}
-		},
-		remove : {
-			method : 'DELETE'
-		}
-	});
-} ]);
+ phonecatServices.factory('Client', [ '$resource', function($resource) {
+ return $resource('http://localhost:8080/clients/:clientId', {}, {
+ show : {
+ method : 'GET',
+ isArray : false
+ },
+ update : {
+ method : 'PUT',
+ params : {
+ clientId : '@clientId'
+ }
+ },
+ remove : {
+ method : 'DELETE'
+ }
+ });
+ } ]);
 
-/* Categories 
+ /* Categories 
 
-phonecatServices.factory('Categories', [ '$resource', function($resource) {
-	return $resource('http://localhost:8080/categories', {}, {
-		query : {
-			method : 'GET',
-			isArray : false,
-		},
-		create : {
-			method : 'POST'
-		}
-	});
-} ]);
+ phonecatServices.factory('Categories', [ '$resource', function($resource) {
+ return $resource('http://localhost:8080/categories', {}, {
+ query : {
+ method : 'GET',
+ isArray : false,
+ },
+ create : {
+ method : 'POST'
+ }
+ });
+ } ]);
 
-phonecatServices.factory('Category', [ '$resource', function($resource) {
-	return $resource('http://localhost:8080/categories/:categoryId', {}, {
-		show : {
-			method : 'GET',
-			isArray : false
-		},
-		update : {
-			method : 'PUT',
-			params : {
-				categoryId : '@categoryId'
-			}
-		},
-		remove : {
-			method : 'DELETE'
-		}
-	});
-} ]);
+ phonecatServices.factory('Category', [ '$resource', function($resource) {
+ return $resource('http://localhost:8080/categories/:categoryId', {}, {
+ show : {
+ method : 'GET',
+ isArray : false
+ },
+ update : {
+ method : 'PUT',
+ params : {
+ categoryId : '@categoryId'
+ }
+ },
+ remove : {
+ method : 'DELETE'
+ }
+ });
+ } ]);
 
-/* Expenses 
+ /* Expenses 
 
-phonecatServices.factory('Expenses', [ '$resource', function($resource) {
-	return $resource('http://localhost:8080/expenses', {}, {
-		query : {
-			method : 'GET',
-			isArray : false,
-		},
-		create : {
-			method : 'POST'
-		}
-	});
-} ]);
+ phonecatServices.factory('Expenses', [ '$resource', function($resource) {
+ return $resource('http://localhost:8080/expenses', {}, {
+ query : {
+ method : 'GET',
+ isArray : false,
+ },
+ create : {
+ method : 'POST'
+ }
+ });
+ } ]);
 
-phonecatServices.factory('Expense', [ '$resource', function($resource) {
-	return $resource('http://localhost:8080/expenses/:expenseId', {}, {
-		show : {
-			method : 'GET',
-			isArray : false
-		},
-		update : {
-			method : 'PUT',
-			params : {
-				clientId : '@expenseId'
-			}
-		},
-		remove : {
-			method : 'DELETE'
-		}
-	});
-} ]);
+ phonecatServices.factory('Expense', [ '$resource', function($resource) {
+ return $resource('http://localhost:8080/expenses/:expenseId', {}, {
+ show : {
+ method : 'GET',
+ isArray : false
+ },
+ update : {
+ method : 'PUT',
+ params : {
+ clientId : '@expenseId'
+ }
+ },
+ remove : {
+ method : 'DELETE'
+ }
+ });
+ } ]);
 
-/* Income 
+ /* Income 
 
-phonecatServices.factory('Incomes', [ '$resource', function($resource) {
-	return $resource('http://localhost:8080/incomes', {}, {
-		query : {
-			method : 'GET',
-			isArray : false,
-		},
-		create : {
-			method : 'POST'
-		}
-	});
-} ]);
+ phonecatServices.factory('Incomes', [ '$resource', function($resource) {
+ return $resource('http://localhost:8080/incomes', {}, {
+ query : {
+ method : 'GET',
+ isArray : false,
+ },
+ create : {
+ method : 'POST'
+ }
+ });
+ } ]);
 
-phonecatServices.factory('Income', [ '$resource', function($resource) {
-	return $resource('http://localhost:8080/incomes/:incomeId', {}, {
-		show : {
-			method : 'GET',
-			isArray : false
-		},
-		update : {
-			method : 'PUT',
-			params : {
-				clientId : '@incomeId'
-			}
-		},
-		remove : {
-			method : 'DELETE'
-		}
-	});
-} ]); */
+ phonecatServices.factory('Income', [ '$resource', function($resource) {
+ return $resource('http://localhost:8080/incomes/:incomeId', {}, {
+ show : {
+ method : 'GET',
+ isArray : false
+ },
+ update : {
+ method : 'PUT',
+ params : {
+ clientId : '@incomeId'
+ }
+ },
+ remove : {
+ method : 'DELETE'
+ }
+ });
+ } ]); */
