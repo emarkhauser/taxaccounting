@@ -1,27 +1,30 @@
 var controllers = angular.module('controllers-category', []);
 
-//Works
-controllers.controller('CategoryListCtrl', [ '$scope', 
-		'RestService', '$location',
-		function($scope, RestService, $location) {
-	
-			restUrl = {'restUrl' : 'categories'};
-			
+// Works
+controllers.controller('CategoryListCtrl', [ '$scope', 'RestService',
+		'$location', function($scope, RestService, $location) {
+
+			restUrl = {
+				'restUrl' : 'categories'
+			};
+
 			function entityView() {
 				return $location.path('/app/categories-create');
 			}
-	
+			;
+
 			// Query
 			function query_all() {
 				return RestService.query(restUrl);
 			}
-	
+			;
+
 			$scope.categories = query_all();
 
 			$scope.updateCategoryView = function(id) {
 				$location.path('/app/categories/' + id);
 			};
-			
+
 			$scope.deleteCategory = function(id) {
 				RestService.remove(restUrl, {
 					id : id
@@ -43,35 +46,50 @@ controllers.controller('CategoryDetailCtrl', [ '$scope', '$routeParams',
 		'$location', 'RestService',
 		function($scope, $routeParams, $location, RestService) {
 
-			$scope.category = RestService.get({
+			restUrl = {
+				'restUrl' : 'categories'
+			};
+
+			function entityListView() {
+				return $location.path('/app/categories');
+			}
+			;
+
+			// Works
+			$scope.category = RestService.get(restUrl, {
 				id : $routeParams.categoryId
 			});
 
 			$scope.updateCategory = function() {
-				RestService.update({
-					'restUrl' : 'categories'
-				}, $scope.category);
-				$location.path('/app/categories');
+				RestService.update({'restUrl':$scope.category._links.self.href}, $scope.category);
+				entityListView();
 			};
 
 			$scope.cancel = function() {
-				$location.path('/app/categories');
+				entityListView();
 			};
 
 		} ]);
 
-controllers.controller('CategoryCreateCtrl', [ '$scope', 'RestServices',
-		'$location', function($scope, RestServices, $location) {
+controllers.controller('CategoryCreateCtrl', [ '$scope', 'RestService',
+		'$location', function($scope, RestService, $location) {
+
+			restUrl = {
+				'restUrl' : 'categories'
+			};
+
+			function entityListView() {
+				return $location.path('/app/categories');
+			}
+			;
 
 			$scope.createCategory = function() {
-				RestServices.create({
-					'restUrl' : 'categories'
-				}, ($scope.category));
-				$location.path('/app/categories');
+				RestService.save(restUrl, $scope.category);
+				entityListView();
 			};
 
 			$scope.cancel = function() {
-				$location.path('/app/categories');
+				entityListView();
 			};
 
 		} ]);
@@ -92,8 +110,7 @@ controllers.controller('CategoryCreateCtrl', [ '$scope', 'RestServices',
  * $location.path('/app/categories-create'); };
  * 
  * $scope.showClientView = function() {
- * $location.path('/app/Categories-create'); };
- *  } ]);
+ * $location.path('/app/Categories-create'); }; } ]);
  * 
  * controllers.controller('CategoryDetailCtrl', [ '$scope', '$routeParams',
  * '$location', 'Category', function($scope, $routeParams, $location, Category) {
@@ -103,8 +120,7 @@ controllers.controller('CategoryCreateCtrl', [ '$scope', 'RestServices',
  * $scope.updateCategory = function() { Category.update($scope.category);
  * $location.path('/app/categories'); };
  * 
- * $scope.cancel = function() { $location.path('/app/categories'); };
- *  } ]);
+ * $scope.cancel = function() { $location.path('/app/categories'); }; } ]);
  * 
  * controllers.controller('CategoryCreateCtrl', [ '$scope', 'Categories',
  * '$location', function($scope, Categories, $location) {
@@ -112,6 +128,5 @@ controllers.controller('CategoryCreateCtrl', [ '$scope', 'RestServices',
  * $scope.createCategory = function() { Categories.create($scope.category);
  * $location.path('/app/categories'); };
  * 
- * $scope.cancel = function() { $location.path('/app/categories'); };
- *  } ]);
+ * $scope.cancel = function() { $location.path('/app/categories'); }; } ]);
  */
