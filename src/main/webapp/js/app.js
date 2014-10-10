@@ -18,13 +18,13 @@ taxapp.config([ '$routeProvider', function($routeProvider) {
 
 	}).when('/app/categories', {
 		templateUrl : 'partials/categories-list.html',
-		controller : 'CategoryListCtrl'
+		controller : 'CategoryCtrl'
 	}).when('/app/categories/:categoryId', {
 		templateUrl : 'partials/categories-detail.html',
-		controller : 'CategoryDetailCtrl'
+		controller : 'CategoryCtrl'
 	}).when('/app/categories-create', {
 		templateUrl : 'partials/categories-create.html',
-		controller : 'CategoryCreateCtrl'
+		controller : 'CategoryCtrl'
 
 	}).when('/app/expenses', {
 		templateUrl : 'partials/expenses-list.html',

@@ -1,8 +1,8 @@
 var controllers = angular.module('controllers-category', []);
 
 // Works
-controllers.controller('CategoryListCtrl', [ '$scope', 'RestService',
-		'$location', function($scope, RestService, $location) {
+controllers.controller('CategoryCtrl', [ '$scope', 'RestService', '$routeParams',
+		'$location', function($scope, RestService, $routeParams, $location) {
 
 			restUrl = {
 				'restUrl' : 'categories'
@@ -13,7 +13,11 @@ controllers.controller('CategoryListCtrl', [ '$scope', 'RestService',
 			}
 			;
 
-			// Query
+			function entityListView() {
+				return $location.path('/app/categories');
+			}
+			;
+
 			function query_all() {
 				return RestService.query(restUrl);
 			}
@@ -40,51 +44,23 @@ controllers.controller('CategoryListCtrl', [ '$scope', 'RestService',
 				entityView();
 			};
 
-		} ]);
+			/* Create */
 
-controllers.controller('CategoryDetailCtrl', [ '$scope', '$routeParams',
-		'$location', 'RestService',
-		function($scope, $routeParams, $location, RestService) {
-
-			restUrl = {
-				'restUrl' : 'categories'
+			$scope.createCategory = function() {
+				RestService.save(restUrl, $scope.category);
+				entityListView();
 			};
 
-			function entityListView() {
-				return $location.path('/app/categories');
-			}
-			;
+			/* Details */
 
-			// Works
 			$scope.category = RestService.get(restUrl, {
 				id : $routeParams.categoryId
 			});
 
-			$scope.updateCategory = function() {
-				RestService.update({'restUrl':$scope.category._links.self.href}, $scope.category);
-				entityListView();
-			};
-
-			$scope.cancel = function() {
-				entityListView();
-			};
-
-		} ]);
-
-controllers.controller('CategoryCreateCtrl', [ '$scope', 'RestService',
-		'$location', function($scope, RestService, $location) {
-
-			restUrl = {
-				'restUrl' : 'categories'
-			};
-
-			function entityListView() {
-				return $location.path('/app/categories');
-			}
-			;
-
-			$scope.createCategory = function() {
-				RestService.save(restUrl, $scope.category);
+			$scope.updateCategory = function(id) {
+				RestService.update(restUrl, {
+					id : id
+				}, $scope.category);
 				entityListView();
 			};
 

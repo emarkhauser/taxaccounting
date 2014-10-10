@@ -3,7 +3,7 @@ var phonecatServices = angular.module('services', [ 'ngResource' ]);
 /* http://www.masnun.com/2013/08/28/rest-access-in-angularjs-using-ngresource.html */
 
 phonecatServices.factory('RestService', [ '$resource', function($resource) {
-	return $resource('http://localhost:8080/:restUrl/:id', {
+	return $resource(':restUrl/:id', {
 		restUrl : "@restUrl",
 		id : '@id'
 	}, {
