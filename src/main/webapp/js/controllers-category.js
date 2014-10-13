@@ -3,15 +3,10 @@ var controllers = angular.module('controllers-category', []);
 // Works
 controllers.controller('CategoryCtrl', [ '$scope', 'RestService', '$routeParams',
 		'$location', function($scope, RestService, $routeParams, $location) {
-
-			restUrl = {
-				'restUrl' : 'categories'
-			};
-
-			function entityView() {
-				return $location.path('/app/categories-create');
-			}
-			;
+	
+			/* General variable declarations and functions */
+	
+			restEntityUrl = '/categories';
 
 			function entityListView() {
 				return $location.path('/app/categories');
@@ -19,53 +14,39 @@ controllers.controller('CategoryCtrl', [ '$scope', 'RestService', '$routeParams'
 			;
 
 			function query_all() {
-				return RestService.query(restUrl);
+				return RestService(restEntityUrl).query();
 			}
 			;
-
-			$scope.categories = query_all();
-
-			$scope.updateCategoryView = function(id) {
-				$location.path('/app/categories/' + id);
-			};
-
-			$scope.deleteCategory = function(id) {
-				RestService.remove(restUrl, {
-					id : id
-				});
-				$scope.categories = query_all();
-			};
-
-			$scope.createCategoryView = function() {
-				entityView();
-			};
-
-			$scope.showCategoryView = function() {
-				entityView();
-			};
 
 			/* Create */
 
 			$scope.createCategory = function() {
-				RestService.save(restUrl, $scope.category);
+				RestService(restEntityUrl).save($scope.category);
 				entityListView();
 			};
 
-			/* Details */
+			/* Read all */
+			
+			$scope.categories = query_all();
+			
+			/* Read One */
 
-			$scope.category = RestService.get(restUrl, {
-				id : $routeParams.categoryId
+			$scope.category = RestService(restEntityUrl).get({
+				id : $routeParams.id
 			});
-
-			$scope.updateCategory = function(id) {
-				RestService.update(restUrl, {
-					id : id
-				}, $scope.category);
+			
+			/* Update */
+			
+			$scope.updateCategory = function(url) {
+				RestService(url).update($scope.category);
 				entityListView();
 			};
-
-			$scope.cancel = function() {
-				entityListView();
+			
+			/* Delete */
+			
+			$scope.deleteCategory = function(url) {
+				RestService(url).remove();
+				$scope.categories = query_all();
 			};
 
 		} ]);

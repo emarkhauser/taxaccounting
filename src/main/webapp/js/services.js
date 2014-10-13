@@ -3,18 +3,23 @@ var phonecatServices = angular.module('services', [ 'ngResource' ]);
 /* http://www.masnun.com/2013/08/28/rest-access-in-angularjs-using-ngresource.html */
 
 phonecatServices.factory('RestService', [ '$resource', function($resource) {
-	return $resource(':restUrl/:id', {
-		restUrl : "@restUrl",
-		id : '@id'
-	}, {
-		query : {
-			method : 'GET',
-			isArray : false
-		},
-		update : {
-			method : 'PUT'
-		}
-	});
+
+	return function(restEntityUrl) {
+
+		return $resource(restEntityUrl + '/:id', {
+			'id' : '@id'
+		}, {
+			query : {
+				method : 'GET',
+				isArray : false
+			},
+			update : {
+				method : 'PUT'
+			}
+		});
+
+	};
+
 } ]);
 
 /*
@@ -27,8 +32,8 @@ phonecatServices.factory('RestService', [ '$resource', function($resource) {
  * phonecatServices.factory('Client', [ '$resource', function($resource) {
  * return $resource('http://localhost:8080/clients/:clientId', {}, { show : {
  * method : 'GET', isArray : false }, update : { method : 'PUT', params : {
- * clientId : '@clientId' } }, remove : { method : 'DELETE' } }); } ]);
- *  /* Categories
+ * clientId : '@clientId' } }, remove : { method : 'DELETE' } }); } ]); /*
+ * Categories
  * 
  * phonecatServices.factory('Categories', [ '$resource', function($resource) {
  * return $resource('http://localhost:8080/categories', {}, { query : { method :
@@ -37,8 +42,8 @@ phonecatServices.factory('RestService', [ '$resource', function($resource) {
  * phonecatServices.factory('Category', [ '$resource', function($resource) {
  * return $resource('http://localhost:8080/categories/:categoryId', {}, { show : {
  * method : 'GET', isArray : false }, update : { method : 'PUT', params : {
- * categoryId : '@categoryId' } }, remove : { method : 'DELETE' } }); } ]);
- *  /* Expenses
+ * categoryId : '@categoryId' } }, remove : { method : 'DELETE' } }); } ]); /*
+ * Expenses
  * 
  * phonecatServices.factory('Expenses', [ '$resource', function($resource) {
  * return $resource('http://localhost:8080/expenses', {}, { query : { method :
@@ -47,8 +52,8 @@ phonecatServices.factory('RestService', [ '$resource', function($resource) {
  * phonecatServices.factory('Expense', [ '$resource', function($resource) {
  * return $resource('http://localhost:8080/expenses/:expenseId', {}, { show : {
  * method : 'GET', isArray : false }, update : { method : 'PUT', params : {
- * clientId : '@expenseId' } }, remove : { method : 'DELETE' } }); } ]);
- *  /* Income
+ * clientId : '@expenseId' } }, remove : { method : 'DELETE' } }); } ]); /*
+ * Income
  * 
  * phonecatServices.factory('Incomes', [ '$resource', function($resource) {
  * return $resource('http://localhost:8080/incomes', {}, { query : { method :

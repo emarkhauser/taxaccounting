@@ -8,6 +8,6 @@
 				ng-model="category.name" />
   </div>
 
-	<button type="submit" class="btn btn-primary" ng-click="updateCategory(category.categoryId)">Update category</button>
-	<button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+	<button type="submit" class="btn btn-primary" ng-click="updateCategory(category._links.self.href)">Update category</button>
+	<a class="btn btn-danger" href="#/app/categories">Cancel</a>
 </form>

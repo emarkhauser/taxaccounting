@@ -19,7 +19,7 @@ taxapp.config([ '$routeProvider', function($routeProvider) {
 	}).when('/app/categories', {
 		templateUrl : 'partials/categories-list.html',
 		controller : 'CategoryCtrl'
-	}).when('/app/categories/:categoryId', {
+	}).when('/app/categories/:id', {
 		templateUrl : 'partials/categories-detail.html',
 		controller : 'CategoryCtrl'
 	}).when('/app/categories-create', {
