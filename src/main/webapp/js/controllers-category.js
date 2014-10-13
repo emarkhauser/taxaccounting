@@ -1,8 +1,7 @@
 var controllers = angular.module('controllers-category', []);
 
-// Works
 controllers.controller('CategoryCtrl', [ '$scope', 'RestService', '$routeParams',
-		'$location', function($scope, RestService, $routeParams, $location) {
+		'$location', 'ControllerService', function($scope, RestService, $routeParams, $location, ControllerService) {
 	
 			/* General variable declarations and functions */
 	
@@ -18,12 +17,14 @@ controllers.controller('CategoryCtrl', [ '$scope', 'RestService', '$routeParams'
 			}
 			;
 
-			/* Create */
+			/* Create 
 
 			$scope.createCategory = function() {
 				RestService(restEntityUrl).save($scope.category);
 				entityListView();
-			};
+			};  */
+			
+			$scope.createCategory = ControllerService.createEntity(restEntityUrl, '/app/categories', $scope.category);
 
 			/* Read all */
 			

@@ -1,6 +1,6 @@
 var taxapp = angular.module('taxapp', [ 'ngRoute', 'controllers-client',
 		'controllers-category', 'controllers-expense', 'controllers-income',
-		'services']);
+		'services', 'controllerService']);
 
 taxapp.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/', {

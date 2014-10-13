@@ -1,11 +1,9 @@
-var phonecatServices = angular.module('services', [ 'ngResource' ]);
+var restServices = angular.module('services', [ 'ngResource' ]);
 
 /* http://www.masnun.com/2013/08/28/rest-access-in-angularjs-using-ngresource.html */
 
-phonecatServices.factory('RestService', [ '$resource', function($resource) {
-
+restServices.factory('RestService', [ '$resource', function($resource) {
 	return function(restEntityUrl) {
-
 		return $resource(restEntityUrl + '/:id', {
 			'id' : '@id'
 		}, {
@@ -17,9 +15,7 @@ phonecatServices.factory('RestService', [ '$resource', function($resource) {
 				method : 'PUT'
 			}
 		});
-
 	};
-
 } ]);
 
 /*
