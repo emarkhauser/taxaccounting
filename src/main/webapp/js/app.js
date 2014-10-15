@@ -3,6 +3,10 @@ var taxapp = angular.module('taxapp', [ 'ngRoute', 'controllers-client',
 		'services']);
 
 taxapp.config([ '$routeProvider', function($routeProvider) {
+	
+	categoryRestEntityUrl = '/categories';
+	categoryAppEntityUrl = '/app/categories';
+	
 	$routeProvider.when('/', {
 		templateUrl : 'partials/home.html'
 
@@ -18,13 +22,19 @@ taxapp.config([ '$routeProvider', function($routeProvider) {
 
 	}).when('/app/categories', {
 		templateUrl : 'partials/categories-list.html',
-		controller : 'CategoryCtrl'
+		controller : 'CategoryCtrl',
+		restEntityUrl : categoryRestEntityUrl,
+		appEntityUrl : categoryAppEntityUrl
 	}).when('/app/categories/:id', {
 		templateUrl : 'partials/categories-detail.html',
-		controller : 'CategoryCtrl'
+		controller : 'CategoryCtrl',
+		restEntityUrl : categoryRestEntityUrl,
+		appEntityUrl : categoryAppEntityUrl
 	}).when('/app/categories-create', {
 		templateUrl : 'partials/categories-create.html',
-		controller : 'CategoryCtrl'
+		controller : 'CategoryCtrl',
+		restEntityUrl : categoryRestEntityUrl,
+		appEntityUrl : categoryAppEntityUrl
 
 	}).when('/app/expenses', {
 		templateUrl : 'partials/expenses-list.html',

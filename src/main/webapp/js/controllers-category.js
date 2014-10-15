@@ -1,13 +1,13 @@
 var controllers = angular.module('controllers-category', []);
 
-controllers.controller('CategoryCtrl', [ '$scope', 'RestService',
+controllers.controller('CategoryCtrl', [ '$scope', 'RestService', '$route',
 		'$routeParams', '$location',
-		function($scope, RestService, $routeParams, $location) {
+		function($scope, RestService, $route, $routeParams, $location) {
 
 			/* General variable declarations and functions */
-
-			restEntityUrl = '/categories';
-			appEntityUrl = '/app/categories';
+	
+			restEntityUrl = $route.current.restEntityUrl;
+			appEntityUrl = $route.current.appEntityUrl;
 
 			/* Create */
 
@@ -18,7 +18,7 @@ controllers.controller('CategoryCtrl', [ '$scope', 'RestService',
 
 			/* Read all */
 
-			$scope.category = RestService(restEntityUrl).query();
+			$scope.categories = RestService(restEntityUrl).query();
 
 			/* Read One */
 
