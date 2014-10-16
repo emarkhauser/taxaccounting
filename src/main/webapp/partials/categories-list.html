@@ -13,7 +13,7 @@
 			<th>Delete</th>
 		</tr>
 
-		<tr ng-repeat="category in categories._embedded.categories">
+		<tr ng-repeat="category in entities._embedded.categories">
 			<td><a
 				href="#/app/categories/{{category.categoryId}}">{{category.name}}</a></td>
 			<td><button type="button" class="btn btn-danger"

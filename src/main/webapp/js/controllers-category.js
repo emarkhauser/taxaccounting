@@ -12,24 +12,30 @@ controllers.controller('CategoryCtrl', [ '$scope', 'RestService', '$route',
 			/* Create */
 
 			$scope.createEntity = function() {
-				RestService(restEntityUrl).save($scope.category);
+				RestService(restEntityUrl).save($scope.entity);
 				$location.path(appEntityUrl);
 			};
 
 			/* Read all */
 
-			$scope.categories = RestService(restEntityUrl).query();
+			$scope.entities = RestService(restEntityUrl).query();
 
 			/* Read One */
 
-			$scope.category = RestService(restEntityUrl).get({
+			$scope.entity = RestService(restEntityUrl).get({
 				id : $routeParams.id
 			});
+			
+			/* View Entity */
+			
+			$scope.viewEntity = function (url) {
+				// To be implemented
+			};
 
 			/* Update */
 
 			$scope.updateEntity = function(url) {
-				RestService(url).update($scope.category);
+				RestService(url).update($scope.entity);
 				$location.path(appEntityUrl);
 			};
 
@@ -37,7 +43,7 @@ controllers.controller('CategoryCtrl', [ '$scope', 'RestService', '$route',
 
 			$scope.deleteEntity = function(url) {
 				RestService(url).remove();
-				$scope.categories = ControllerService.entities(restEntityUrl);
+				$scope.entities = RestService(restEntityUrl).query();
 			};
 
 		} ]);
