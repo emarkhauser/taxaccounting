@@ -5,33 +5,32 @@
 		<div class="form-group">
 		<label class="control-label" for="amount">amount:</label> <input
 			type="text" id="amount" class="form-control"
-			placeholder="Enter amount" ng-model="expense.amount" /> 
+			placeholder="Enter amount" ng-model="entity.amount" /> 
 						
 		<label class="control-label"
 			for="name">category:</label> <input type="text" id="category"
 			class="form-control" placeholder="Enter category"
-			ng-model="expense.category" /> 
+			ng-model="entity.category" /> 
 			
 		<label class="control-label"
 			for="calendar">calendar:</label> <input type="text" id="calendar"
 			class="form-control" placeholder="Enter calendar"
-			ng-model="expense.calendar" /> 
+			ng-model="entity.calendar" /> 
 			
 		<label class="control-label"
 			for="note">note:</label> <input type="text"
 			id="note" class="form-control" placeholder="Enter note"
-			ng-model="expense.note" /> 
+			ng-model="entity.note" /> 
 			
 		<label class="control-label"
 			for="particulars">particulars:</label> <input type="text" id="particulars"
-			class="form-control" placeholder="Enter particulars" ng-model="expense.particulars" />		
+			class="form-control" placeholder="Enter particulars" ng-model="entity.particulars" />		
 			
 		<label class="control-label"
 			for="hst">hst:</label> <input type="text" id="hst"
-			class="form-control" placeholder="Enter hst" ng-model="expense.hst" />
+			class="form-control" placeholder="Enter hst" ng-model="entity.hst" />
 	</div>
 
-	<button type="submit" class="btn btn-primary"
-		ng-click="updateExpense(expense.expenseId)">Update expense</button>
-	<button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+	<button type="submit" class="btn btn-primary" ng-click="updateEntity(entity._links.self.href)">Update expense</button>
+	<button class="btn btn-danger" ng-click="cancel()">Cancel</button>
 </form>

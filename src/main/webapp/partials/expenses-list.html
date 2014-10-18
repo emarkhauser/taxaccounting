@@ -13,23 +13,26 @@
 			<th>calendar</th>
 			<th>particulars</th>
 			<th>hst</th>
-			<th>Delete</th>
+			<th></th>
+			<th></th>
 		</tr>
 
-		<tr ng-repeat="expense in expenses._embedded.expenses">
-			<td>{{expense.amount}}</td>
-			<td>{{expense.category}}</td>
-			<td>{{expense.note}}</td>
-			<td>{{expense.calendar}}</td>
-			<td>{{expense.particulars}}</td>
-			<td>{{expense.hst}}</td>
+		<tr ng-repeat="entity in entities._embedded.expenses">
+			<td>{{entity.amount}}</td>
+			<td>{{entity.category}}</td>
+			<td>{{entity.note}}</td>
+			<td>{{entity.calendar}}</td>
+			<td>{{entity.particulars}}</td>
+			<td>{{entity.hst}}</td>
+			<td><button type="button" class="btn"
+					ng-click="viewEntity(entity._links.self.href)">View</button></td>
 			<td><button type="button" class="btn btn-danger"
-					ng-click="deleteExpense(expense.expenseId)">Delete</button></td>
+					ng-click="deleteEntity(entity._links.self.href)">Delete</button></td>
 		</tr>
 	</table>
 	<br />
 
-	<button type="button" class="btn btn-primary"
-		ng-click="createExpenseView()">Create New Expense</button>
+	<button class="btn btn-primary"
+		ng-click="viewCreateEntity()">Create New Expense</button>
 
 </div>

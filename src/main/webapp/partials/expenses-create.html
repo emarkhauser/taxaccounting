@@ -2,36 +2,28 @@
 
 <form role="form">
 
-		<div class="form-group">
+	<div class="form-group">
 		<label class="control-label" for="amount">amount:</label> <input
 			type="text" id="amount" class="form-control"
-			placeholder="Enter amount" ng-model="expense.amount" /> 
-						
-		<label class="control-label"
-			for="name">category:</label> <input type="text" id="category"
-			class="form-control" placeholder="Enter category"
-			ng-model="expense.category" /> 
-			
-		<label class="control-label"
+			placeholder="Enter amount" ng-model="entity.amount" /> <label
+			class="control-label" for="name">category:</label> <input type="text"
+			id="category" class="form-control" placeholder="Enter category"
+			ng-model="entity.category" /> <label class="control-label"
 			for="calendar">calendar:</label> <input type="text" id="calendar"
 			class="form-control" placeholder="Enter calendar"
-			ng-model="expense.calendar" /> 
-			
-		<label class="control-label"
-			for="note">note:</label> <input type="text"
-			id="note" class="form-control" placeholder="Enter note"
-			ng-model="expense.note" /> 
-			
-		<label class="control-label"
-			for="particulars">particulars:</label> <input type="text" id="particulars"
-			class="form-control" placeholder="Enter particulars" ng-model="expense.particulars" />		
-			
-		<label class="control-label"
-			for="hst">hst:</label> <input type="text" id="hst"
-			class="form-control" placeholder="Enter hst" ng-model="expense.hst" />
+			ng-model="entity.calendar" /> <label class="control-label"
+			for="note">note:</label> <input type="text" id="note"
+			class="form-control" placeholder="Enter note" ng-model="entity.note" />
+
+		<label class="control-label" for="particulars">particulars:</label> <input
+			type="text" id="particulars" class="form-control"
+			placeholder="Enter particulars" ng-model="entity.particulars" /> <label
+			class="control-label" for="hst">hst:</label> <input type="text"
+			id="hst" class="form-control" placeholder="Enter hst"
+			ng-model="entity.hst" />
 	</div>
 
-	<button type="submit" class="btn btn-primary" ng-click="createExpense()">Create
+	<button type="submit" class="btn btn-primary" ng-click="createEntity()">Create
 		new expense</button>
-	<button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+	<button class="btn btn-danger" ng-click="cancel()">Cancel</button>
 </form>

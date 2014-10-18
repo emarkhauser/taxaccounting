@@ -8,19 +8,21 @@
 	<table class="table">
 		<tr>
 			<th>Name</th>
-			<th>Delete</th>
+			<th></th>
+			<th></th>
 		</tr>
 
-		<tr ng-repeat="client in clients._embedded.clients">
-			<td><a
-				href="http://localhost:8080/#/app/clients/{{client.clientId}}">{{client.name}}</a></td>
+		<tr ng-repeat="entity in entities._embedded.clients">
+			<td>{{entity.name}}</td>
+			<td><button type="button" class="btn"
+					ng-click="viewEntity(entity._links.self.href)">View</button></td>
 			<td><button type="button" class="btn btn-danger"
-					ng-click="deleteClient(client.clientId)">Delete</button></td>
+					ng-click="deleteEntity(entity._links.self.href)">Delete</button></td>
 		</tr>
 	</table>
 	<br />
 
-	<button type="button" class="btn btn-primary"
-		ng-click="createClientView()">Create New Client</button>
+	<button class="btn btn-primary"
+		ng-click="viewCreateEntity()">Create New Client</button>
 
 </div>

@@ -1,10 +1,8 @@
-var restServices = angular.module('services', [ 'ngResource' ]);
+var restServices = angular.module('restServices', [ 'ngResource' ]);
 
 restServices.factory('RestService', [ '$resource', function($resource) {
 	return function(restEntitiesUrl) {
-		return $resource(restEntitiesUrl + '/:id', {
-			'id' : '@id'
-		}, {
+		return $resource(restEntitiesUrl, {}, {
 			query : {
 				method : 'GET',
 				isArray : false

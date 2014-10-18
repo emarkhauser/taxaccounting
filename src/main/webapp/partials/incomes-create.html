@@ -5,45 +5,45 @@
 		<div class="form-group">
 		<label class="control-label" for="cashSales">cashSales:</label> <input
 			type="text" id="cashSales" class="form-control"
-			placeholder="Enter cashSales" ng-model="income.cashSales" /> 
+			placeholder="Enter cashSales" ng-model="entity.cashSales" /> 
 			
 		<label
 			class="control-label" for="salesReturns">salesReturns:</label> <input
 			type="text" id="salesReturns" class="form-control"
-			placeholder="Enter salesReturns" ng-model="income.salesReturns" /> 
+			placeholder="Enter salesReturns" ng-model="entity.salesReturns" /> 
 			
 		<label
 			class="control-label" for="totalSales">totalSales:</label> <input
 			type="text" id="totalSales" class="form-control"
-			placeholder="Enter totalSales" ng-model="income.totalSales" /> 
+			placeholder="Enter totalSales" ng-model="entity.totalSales" /> 
 			
 		<label
 			class="control-label" for="paymentOnAccount">paymentOnAccount:</label>
 		<input type="text" id="paymentOnAccount" class="form-control"
 			placeholder="Enter paymentOnAccount"
-			ng-model="income.paymentOnAccount" /> 
+			ng-model="entity.paymentOnAccount" /> 
 			
 		<label class="control-label"
 			for="name">client:</label>
 		<select id="client" class="form-control" ng-model="income.client" 
-			ng-options="client.name for client in clients._embedded.clients"></select>
+			ng-options="client.name for client in clients"></select>
 			
 		<label class="control-label"
 			for="calendar">calendar:</label> <input type="text" id="calendar"
 			class="form-control" placeholder="Enter calendar"
-			ng-model="income.calendar" /> 
+			ng-model="entity.calendar" /> 
 			
 		<label class="control-label"
 			for="particulars">particulars:</label> <input type="text"
 			id="particulars" class="form-control" placeholder="Enter particulars"
-			ng-model="income.particulars" /> 
+			ng-model="entity.particulars" /> 
 			
 		<label class="control-label"
 			for="hst">hst:</label> <input type="text" id="hst"
-			class="form-control" placeholder="Enter hst" ng-model="income.hst" />
+			class="form-control" placeholder="Enter hst" ng-model="entity.hst" />
 	</div>
 
-	<button type="submit" class="btn btn-primary" ng-click="createIncome()">Create
+	<button type="submit" class="btn btn-primary" ng-click="createEntity()">Create
 		new income</button>
-	<button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+	<button class="btn btn-danger" ng-click="cancel()">Cancel</button>
 </form>
