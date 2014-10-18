@@ -1,40 +1,48 @@
-var taxapp = angular.module('taxapp', [ 'ngRoute', 'controllers-client',
-		'controllers-category', 'controllers-expense', 'controllers-income',
+var taxapp = angular.module('taxapp', [ 'ngRoute', 'genericController',
+		'controllers-expense', 'controllers-income',
 		'services']);
 
 taxapp.config([ '$routeProvider', function($routeProvider) {
 	
-	categoryRestEntityUrl = '/categories';
-	categoryAppEntityUrl = '/app/categories';
-	
+	clientRestEntitiesUrl = '/clients';
+	clientAppEntitiesUrl = '/app/clients';
+	categoryRestEntitiesUrl = '/categories';
+	categoryAppEntitiesUrl = '/app/categories';
+
 	$routeProvider.when('/', {
 		templateUrl : 'partials/home.html'
 
 	}).when('/app/clients', {
 		templateUrl : 'partials/clients-list.html',
-		controller : 'ClientListCtrl'
+		controller : 'GenericController',
+		restEntitiesUrl : clientRestEntitiesUrl,
+		appEntitiesUrl : categoryAppEntitiesUrl
 	}).when('/app/clients/:clientId', {
 		templateUrl : 'partials/clients-detail.html',
-		controller : 'ClientDetailCtrl'
+		controller : 'GenericController',
+		restEntitiesUrl : clientRestEntitiesUrl,
+		appEntitiesUrl : categoryAppEntitiesUrl
 	}).when('/app/clients-create', {
 		templateUrl : 'partials/clients-create.html',
-		controller : 'ClientCreateCtrl'
+		controller : 'GenericController',
+		restEntitiesUrl : clientRestEntitiesUrl,
+		appEntitiesUrl : categoryAppEntitiesUrl
 
 	}).when('/app/categories', {
 		templateUrl : 'partials/categories-list.html',
-		controller : 'CategoryCtrl',
-		restEntityUrl : categoryRestEntityUrl,
-		appEntityUrl : categoryAppEntityUrl
+		controller : 'GenericController',
+		restEntitiesUrl : categoryRestEntitiesUrl,
+		appEntitiesUrl : categoryAppEntitiesUrl
 	}).when('/app/categories/:id', {
 		templateUrl : 'partials/categories-detail.html',
-		controller : 'CategoryCtrl',
-		restEntityUrl : categoryRestEntityUrl,
-		appEntityUrl : categoryAppEntityUrl
+		controller : 'GenericController',
+		restEntitiesUrl : categoryRestEntitiesUrl,
+		appEntitiesUrl : categoryAppEntitiesUrl
 	}).when('/app/categories-create', {
 		templateUrl : 'partials/categories-create.html',
-		controller : 'CategoryCtrl',
-		restEntityUrl : categoryRestEntityUrl,
-		appEntityUrl : categoryAppEntityUrl
+		controller : 'GenericController',
+		restEntitiesUrl : categoryRestEntitiesUrl,
+		appEntitiesUrl : categoryAppEntitiesUrl
 
 	}).when('/app/expenses', {
 		templateUrl : 'partials/expenses-list.html',
