@@ -28,10 +28,6 @@ public class Client {
 	
 	public Client () {
 	}
-	
-	public long getClientId() {
-		return id;
-	}
 
 	public String getName() {
 		return name;

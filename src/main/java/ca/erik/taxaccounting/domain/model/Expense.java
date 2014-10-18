@@ -20,8 +20,6 @@ public class Expense {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	private long expenseId;
-	
 	private Double amount;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -34,10 +32,6 @@ public class Expense {
 	
 	public Expense() {
 		
-	}
-	
-	public long getExpenseId() {
-		return id;
 	}
 
 	public Double getAmount() {

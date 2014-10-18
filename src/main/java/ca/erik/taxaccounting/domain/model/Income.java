@@ -22,8 +22,6 @@ public class Income {
 	@GeneratedValue
 	private long id;
 	
-	private long incomeId;
-	
 	private double cashSales;
 	private double salesReturns;
 	private double totalSales;
@@ -41,10 +39,6 @@ public class Income {
 	
 	public Income() {
 		
-	}
-	
-	public long getIncomeId() {
-		return id;
 	}
 
 	public double getCashSales() {

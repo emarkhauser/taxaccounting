@@ -32,10 +32,6 @@ public class Category {
 	public Category (String name) {
 		this.name = name;
 	}
-	
-	public long getCategoryId() {
-		return id;
-	}
 
 	public String getName() {
 		return name;
@@ -43,11 +39,6 @@ public class Category {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	@Override
-	public String toString() {
-		return String.format("Category[categoryId=%d, name='%s']", categoryId, name);
 	}
 	
 }
