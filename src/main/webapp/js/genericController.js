@@ -33,6 +33,13 @@ controllers.controller('GenericController', [
 			$scope.createEntity = function() {
 				RestService(restEntitiesUrl).save($scope.entity);
 				$scope.entities = RestService(restEntitiesUrl).query();
+				
+				// Add code to also add referenced entities
+					// Find location of new entity
+						// Query new entity
+							// find all under "_links" except "self"
+								// Post referenced entity
+				
 				$location.path(appEntitiesUrl);
 			};
 			
@@ -80,5 +87,10 @@ controllers.controller('GenericController', [
 				sharedProperties.setEntityDetails({});
 				$location.path(appEntitiesUrl);
 			};
+			
+			/* Categories and Clients */
+			
+			$scope.categories = RestService("/categories").query();
+			$scope.clients = RestService("/clients").query();
 
 		} ]);

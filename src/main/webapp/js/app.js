@@ -1,105 +1,111 @@
-var taxapp = angular.module('taxapp', [ 'ngRoute', 'genericController',
-		'controllers-expense', 'controllers-income', 'restServices' ]);
+angular.module('taxapp', [ 'ngRoute', 'genericController', 'restServices' ])
+		.config(
+				[
+						'$routeProvider',
+						function($routeProvider) {
 
-taxapp.config([
-		'$routeProvider',
-		function($routeProvider) {
+							/* Clients Initialization */
 
-			/* Clients Initialization */
+							clientsVars = {
+								controller : 'GenericController',
+								restEntitiesUrl : '/clients',
+								appEntitiesUrl : '/app/clients'
+							};
 
-			clientsVars = {
-				controller : 'GenericController',
-				restEntitiesUrl : '/clients',
-				appEntitiesUrl : '/app/clients'
-			};
+							clientsList = $.extend({
+								templateUrl : 'partials/clients-list.html'
+							}, clientsVars);
 
-			clientsList = $.extend({
-				templateUrl : 'partials/clients-list.html'
-			}, clientsVars);
+							clientsDetails = $.extend({
+								templateUrl : 'partials/clients-detail.html'
+							}, clientsVars);
 
-			clientsDetails = $.extend({
-				templateUrl : 'partials/clients-detail.html'
-			}, clientsVars);
+							clientsCreate = $.extend({
+								templateUrl : 'partials/clients-create.html'
+							}, clientsVars);
 
-			clientsCreate = $.extend({
-				templateUrl : 'partials/clients-create.html'
-			}, clientsVars);
+							/* Categories Initialization */
 
-			/* Categories Initialization */
+							categoriesVars = {
+								controller : 'GenericController',
+								restEntitiesUrl : '/categories',
+								appEntitiesUrl : '/app/categories'
+							};
 
-			categoriesVars = {
-				controller : 'GenericController',
-				restEntitiesUrl : '/categories',
-				appEntitiesUrl : '/app/categories'
-			};
+							categoriesList = $.extend({
+								templateUrl : 'partials/categories-list.html'
+							}, categoriesVars);
 
-			categoriesList = $.extend({
-				templateUrl : 'partials/categories-list.html'
-			}, categoriesVars);
+							categoriesDetails = $.extend({
+								templateUrl : 'partials/categories-detail.html'
+							}, categoriesVars);
 
-			categoriesDetails = $.extend({
-				templateUrl : 'partials/categories-detail.html'
-			}, categoriesVars);
+							categoriesCreate = $.extend({
+								templateUrl : 'partials/categories-create.html'
+							}, categoriesVars);
 
-			categoriesCreate = $.extend({
-				templateUrl : 'partials/categories-create.html'
-			}, categoriesVars);
+							/* Expenses Initialization */
 
-			/* Expenses Initialization */
+							expensesVars = {
+								controller : 'GenericController',
+								restEntitiesUrl : '/expenses',
+								appEntitiesUrl : '/app/expenses'
+							};
 
-			expensesVars = {
-				controller : 'GenericController',
-				restEntitiesUrl : '/expenses',
-				appEntitiesUrl : '/app/expenses'
-			};
+							expensesList = $.extend({
+								templateUrl : 'partials/expenses-list.html'
+							}, expensesVars);
 
-			expensesList = $.extend({
-				templateUrl : 'partials/expenses-list.html'
-			}, expensesVars);
+							expensesDetails = $.extend({
+								templateUrl : 'partials/expenses-detail.html'
+							}, expensesVars);
 
-			expensesDetails = $.extend({
-				templateUrl : 'partials/expenses-detail.html'
-			}, expensesVars);
+							expensesCreate = $.extend({
+								templateUrl : 'partials/expenses-create.html'
+							}, expensesVars);
 
-			expensesCreate = $.extend({
-				templateUrl : 'partials/expenses-create.html'
-			}, expensesVars);
+							/* Incomes Initialization */
 
-			/* Incomes Initialization */
+							incomesVars = {
+								controller : 'GenericController',
+								restEntitiesUrl : '/incomes',
+								appEntitiesUrl : '/app/incomes'
+							};
 
-			incomesVars = {
-				controller : 'GenericController',
-				restEntitiesUrl : '/incomes',
-				appEntitiesUrl : '/app/incomes'
-			};
+							incomesList = $.extend({
+								templateUrl : 'partials/incomes-list.html'
+							}, incomesVars);
 
-			incomesList = $.extend({
-				templateUrl : 'partials/incomes-list.html'
-			}, incomesVars);
+							incomesDetails = $.extend({
+								templateUrl : 'partials/incomes-detail.html'
+							}, incomesVars);
 
-			incomesDetails = $.extend({
-				templateUrl : 'partials/incomes-detail.html'
-			}, incomesVars);
+							incomesCreate = $.extend({
+								templateUrl : 'partials/incomes-create.html'
+							}, incomesVars);
 
-			incomesCreate = $.extend({
-				templateUrl : 'partials/incomes-create.html'
-			}, incomesVars);
+							/* Route */
 
-			/* Route */
-
-			$routeProvider.when('/', {
-				templateUrl : 'partials/home.html'
-			}).when('/app/clients', clientsList).when('/app/clients-detail',
-					clientsDetails).when('/app/clients-create', clientsCreate)
-					.when('/app/categories', categoriesList).when(
-							'/app/categories-detail', categoriesDetails).when(
-							'/app/categories-create', categoriesCreate).when(
-							'/app/expenses', expensesList).when(
-							'/app/expenses-detail', expensesDetails).when(
-							'/app/expenses-create', expensesCreate).when(
-							'/app/incomes', incomesList).when(
-							'/app/incomes-detail', incomesDetails).when(
-							'/app/incomes-create', incomesCreate).otherwise({
-						redirectTo : '/'
-					});
-		} ]);
+							$routeProvider.when('/', {
+								templateUrl : 'partials/home.html'
+							}).when('/app/clients', clientsList).when(
+									'/app/clients-detail', clientsDetails)
+									.when('/app/clients-create', clientsCreate)
+									.when('/app/categories', categoriesList)
+									.when('/app/categories-detail',
+											categoriesDetails).when(
+											'/app/categories-create',
+											categoriesCreate).when(
+											'/app/expenses', expensesList)
+									.when('/app/expenses-detail',
+											expensesDetails).when(
+											'/app/expenses-create',
+											expensesCreate).when(
+											'/app/incomes', incomesList).when(
+											'/app/incomes-detail',
+											incomesDetails).when(
+											'/app/incomes-create',
+											incomesCreate).otherwise({
+										redirectTo : '/'
+									});
+						} ]);
