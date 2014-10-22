@@ -6,21 +6,22 @@
 		<label class="control-label" for="amount">amount:</label> <input
 			type="text" id="amount" class="form-control"
 			placeholder="Enter amount" ng-model="entity.amount" /> <label
-			class="control-label" for="name">category:</label> <input type="text"
-			id="category" class="form-control" placeholder="Enter category"
-			ng-model="entity.category" /> <label class="control-label"
-			for="calendar">calendar:</label> <input type="text" id="calendar"
-			class="form-control" placeholder="Enter calendar"
-			ng-model="entity.calendar" /> <label class="control-label"
-			for="note">note:</label> <input type="text" id="note"
-			class="form-control" placeholder="Enter note" ng-model="entity.note" />
+			class="control-label" for="category">category:</label> <select
+			id="category" class="form-control" ng-model="entity.category"
+			ng-options="category.name for category in categories._embedded.categories"></select>
 
-		<label class="control-label" for="particulars">particulars:</label> <input
-			type="text" id="particulars" class="form-control"
-			placeholder="Enter particulars" ng-model="entity.particulars" /> <label
-			class="control-label" for="hst">hst:</label> <input type="text"
-			id="hst" class="form-control" placeholder="Enter hst"
-			ng-model="entity.hst" />
+
+		<label class="control-label" for="calendar">calendar:</label> <input
+			type="text" id="calendar" class="form-control"
+			placeholder="Enter calendar" ng-model="entity.calendar" /> <label
+			class="control-label" for="note">note:</label> <input type="text"
+			id="note" class="form-control" placeholder="Enter note"
+			ng-model="entity.note" /> <label class="control-label"
+			for="particulars">particulars:</label> <input type="text"
+			id="particulars" class="form-control" placeholder="Enter particulars"
+			ng-model="entity.particulars" /> <label class="control-label"
+			for="hst">hst:</label> <input type="text" id="hst"
+			class="form-control" placeholder="Enter hst" ng-model="entity.hst" />
 	</div>
 
 	<button type="submit" class="btn btn-primary" ng-click="createEntity()">Create
