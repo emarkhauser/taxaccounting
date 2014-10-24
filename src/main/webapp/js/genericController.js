@@ -33,17 +33,21 @@ controllers.controller('GenericController', [
 			$scope.createEntity = function() {
 				RestService(restEntitiesUrl).save($scope.entity,
 						function(value, responseHeaders) {
-							console.log(responseHeaders);
-						});
+							// Find and Query new entity
+							console.log(RestService(responseHeaders('Location')).query());
+							// find all under "_links" except "self"
 
-				$scope.entities = RestService(restEntitiesUrl).query();
+							// Post referenced entity
 
-				// Add code to also add referenced entities
-				// Find location of new entity
-				// Query new entity
-				// find all under "_links" except "self"
-				// Post referenced entity
+							// URL for relationship entity
+							console.log($scope.entity.client._links.self.href);
+						}, function(error)
+						{
+							console.log(error.data);
+						}
+				);
 
+				$scope.entities = RestService(restEntitiesUrl).query();				
 				$location.path(appEntitiesUrl);
 			};
 
