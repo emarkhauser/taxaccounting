@@ -27,7 +27,7 @@ public class Income {
 	private double totalSales;
 	private double paymentOnAccount;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.REMOVE})
 	private Client client;
 	
 	private Calendar calendar;

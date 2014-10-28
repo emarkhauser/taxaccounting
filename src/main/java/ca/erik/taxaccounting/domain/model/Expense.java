@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+
 /**
  * Domain entity for expense model
  * @author Erik Markhauser
@@ -22,7 +23,7 @@ public class Expense {
 	
 	private Double amount;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.REMOVE})
 	private Category category;
 	
 	private String note;
