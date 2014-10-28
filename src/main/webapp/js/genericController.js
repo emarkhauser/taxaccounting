@@ -32,14 +32,27 @@ controllers.controller('GenericController', [
 
 			$scope.createEntity = function() {
 
-				RestService(restEntitiesUrl).save($scope.entity,
+				RestService(restEntitiesUrl).save(
+						$scope.entity,
 						function(data, header) {
 
 							// Find and get new entity
-							newEntity = RestService(header('Location')).query();
-							console.log(newEntity);
+
+							RestService(header('Location')).get().$promise
+									.then(function(data) {
+										
+										// find all under "_links" except "self"
+										
+										i = data._links;
+										
+										for (var key in i) {
+											  if (key != "self") {
+											    console.log(angular.toJson(i[key]));
+											  }
+											}
+									});
+
 							
-							// find all under "_links" except "self"
 							// Post referenced entity
 							// URL for relationship entity
 							// console.log($scope.entity.client._links.self.href);
