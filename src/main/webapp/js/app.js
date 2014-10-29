@@ -12,9 +12,17 @@ angular.module('taxapp', [ 'ngRoute', 'genericController', 'restServices' ])
 								appEntitiesUrl : '/app/clients'
 							};
 
+							/*
+							 * clientsList = $.extend({ templateUrl :
+							 * 'partials/clients-list.html' }, clientsVars);
+							 */
+
 							clientsList = $.extend({
-								templateUrl : 'partials/clients-list.html'
-							}, clientsVars);
+								templateUrl : 'partials/clients-list.html',
+								controller : 'ListViewController',
+								restEntitiesUrl : '/clients',
+								appEntitiesUrl : '/app/clients'
+							});
 
 							clientsDetails = $.extend({
 								templateUrl : 'partials/clients-detail.html'
