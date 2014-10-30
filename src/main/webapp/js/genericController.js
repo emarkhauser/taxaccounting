@@ -13,89 +13,67 @@ controllers.service('sharedProperties', function() {
 	};
 });
 
+controllers.service('viewCreateEntity', [ 'sharedProperties', '$location',
+		'appEntitiesUrl',
+		function(sharedProperties, $location) {
+			return function(appEntitiesUrl) {
+				sharedProperties.setEntityDetails({});
+				$location.path(appEntitiesUrl + "-create");
+			};
+		} ]);
+
+controllers.service('readAllEntities', [ 'RestService', function(RestService) {
+	return function(restEntitiesUrl) {
+		return RestService(restEntitiesUrl).query();
+	};
+} ]);
+
+controllers.service('viewEntity', [ 'RestService', 'sharedProperties', function(RestService, sharedProperties) {
+	return function(restUrl) {
+		sharedProperties.setEntityDetails(RestService(restUrl).get());
+		$location.path(appEntitiesUrl + "-detail");
+	};
+} ]);
+
+controllers.service('updateEntity', [ 'RestService', 'sharedProperties', function(RestService, sharedProperties) {
+	return function(restUrl) {
+		RestService(restUrl).update($scope.entity);
+		sharedProperties.setEntityDetails({});
+		$location.path(appEntitiesUrl);
+	};
+} ]);
+
+controllers.service('deleteEntity', [ 'RestService', function(RestService) {
+	return function(restUrl) {
+		RestService(restUrl).remove();
+		$scope.entities = RestService(restEntitiesUrl).query();
+		$location.path(appEntitiesUrl);
+	};
+} ]);
+
+controllers.service('cancel', function() {
+	return function(appEntitiesUrl) {
+		$location.path(appEntitiesUrl);
+	};
+});
+
 /* Entity View Controller */
 
-controllers
-		.controller(
-				'EntityViewController',
-				[
-						'$scope',
-						'RestService',
-						'$route',
-						'$routeParams',
-						'$location',
-						'sharedProperties',
-						function($scope, RestService, $route, $routeParams,
-								$location, sharedProperties) {
-
-							/* General variable declarations and functions */
-
-							restEntitiesUrl = $route.current.restEntitiesUrl;
-							appEntitiesUrl = $route.current.appEntitiesUrl;
-
-
-							/* Read One */
-
-							$scope.entity = sharedProperties.getEntityDetails();
-
-							/* View Entity */
-
-							$scope.viewEntity = function(restUrl) {
-								sharedProperties.setEntityDetails(RestService(
-										restUrl).get());
-								$location.path(appEntitiesUrl + "-detail");
-							};
-
-							/* Update */
-
-							$scope.updateEntity = function(restUrl) {
-								RestService(restUrl).update($scope.entity);
-								sharedProperties.setEntityDetails({});
-								$location.path(appEntitiesUrl);
-							};
-
-							/* Cancel */
-
-							$scope.cancel = function() {
-								sharedProperties.setEntityDetails({});
-								$location.path(appEntitiesUrl);
-							};
-
-							/* Categories and Clients */
-
-							$scope.categories = RestService("/categories")
-									.query();
-							$scope.clients = RestService("/clients").query();
-
-						} ]);
-
-/* List View Controller */
-
-controllers.controller('ListViewController', [
+controllers.controller('EntityViewController', [
 		'$scope',
 		'RestService',
 		'$route',
 		'$routeParams',
 		'$location',
 		'sharedProperties',
+		'cancel',
 		function($scope, RestService, $route, $routeParams, $location,
-				sharedProperties) {
+				sharedProperties, cancel) {
 
 			/* General variable declarations and functions */
 
 			restEntitiesUrl = $route.current.restEntitiesUrl;
 			appEntitiesUrl = $route.current.appEntitiesUrl;
-
-			/* View Create */
-
-			$scope.viewCreateEntity = function() {
-				sharedProperties.setEntityDetails({});
-				$location.path(appEntitiesUrl + "-create");
-			};
-
-			/* Read all */
-
-			$scope.entities = RestService(restEntitiesUrl).query();
 
 			/* Read One */
 
@@ -108,13 +86,49 @@ controllers.controller('ListViewController', [
 				$location.path(appEntitiesUrl + "-detail");
 			};
 
-			/* Delete */
+			/* Update */
 
-			$scope.deleteEntity = function(restUrl) {
-				RestService(restUrl).remove();
-				$scope.entities = RestService(restEntitiesUrl).query();
+			$scope.updateEntity = function(restUrl) {
+				RestService(restUrl).update($scope.entity);
+				sharedProperties.setEntityDetails({});
 				$location.path(appEntitiesUrl);
 			};
+
+			/* Cancel */
+
+			$scope.cancel = cancel();
+
+			/* Categories and Clients */
+
+			$scope.categories = RestService("/categories").query();
+			$scope.clients = RestService("/clients").query();
+
+		} ]);
+
+/* List View Controller */
+
+controllers.controller('ListViewController', [
+		'$scope',
+		'RestService',
+		'$route',
+		'$routeParams',
+		'$location',
+		'sharedProperties',
+		'viewCreateEntity',
+		'viewEntity',
+		'readAllEntities',
+		'deleteEntity',
+		function($scope, RestService, $route, $routeParams, $location,
+				sharedProperties, viewCreateEntity, viewEntity,
+				readAllEntities, deleteEntity) {
+
+			restEntitiesUrl = $route.current.restEntitiesUrl;
+			appEntitiesUrl = $route.current.appEntitiesUrl;
+
+			$scope.viewCreateEntity = viewCreateEntity(appEntitiesUrl);
+			$scope.entities = readAllEntities(restEntitiesUrl);
+			$scope.viewEntity = viewEntity(restUrl);
+			$scope.deleteEntity = deleteEntity(restUrl);
 
 		} ]);
 
