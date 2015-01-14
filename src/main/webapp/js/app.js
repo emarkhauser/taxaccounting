@@ -1,119 +1,46 @@
-angular.module('taxapp', [ 'ngRoute', 'genericController', 'restServices' ])
-		.config(
-				[
-						'$routeProvider',
-						function($routeProvider) {
+angular.module('taxapp',
+		[ 'ngRoute', 'genericController', 'restServices', 'crudServices' ])
+		.config([ '$routeProvider', function($routeProvider) {
 
-							/* Clients Initialization */
+			$routeProvider.when('/', {
+				templateUrl : 'partials/home.html'
+			}).otherwise({
+				redirectTo : '/'
+			});
+			
+			var appUrl = '/app/';
+			var partials = 'partials/';
 
-							clientsVars = {
-								controller : 'GenericController',
-								restEntitiesUrl : '/clients',
-								appEntitiesUrl : '/app/clients'
-							};
+			function routeBuilder(type) {
+				$routeProvider.when(appUrl + type, {
+					templateUrl : partials + type + '-list.html',
+					controller : 'ViewAllController',
+					restEntitiesUrl : '/' + type,
+					resolve : {
+						entities : function(CrudService) {
+							return CrudService.entities('/' + type);
+						}
+					}
+				}).when(appUrl + type + '/:id', {
+					templateUrl : partials + type + '-detail.html',
+					controller : 'ViewEntityController',
+					restEntitiesUrl : '/' + type,
+					resolve : {
+						entity : function(CrudService) {
+							return CrudService.entity('/' + type);
+						}
+					}
+				}).when(appUrl + type + '-create', {
+					templateUrl : partials + type + '-create.html',
+					controller : 'ViewCreateController',
+					restEntitiesUrl : '/' + type,
+				});
+			}
+			;
 
-							/*
-							 * clientsList = $.extend({ templateUrl :
-							 * 'partials/clients-list.html' }, clientsVars);
-							 */
+			routeBuilder('clients');
+			routeBuilder('categories');
+			routeBuilder('incomes');
+			routeBuilder('expenses');
 
-							clientsList = $.extend({
-								templateUrl : 'partials/clients-list.html',
-								controller : 'ListViewController',
-								restEntitiesUrl : '/clients',
-								appEntitiesUrl : '/app/clients'
-							});
-
-							clientsDetails = $.extend({
-								templateUrl : 'partials/clients-detail.html'
-							}, clientsVars);
-
-							clientsCreate = $.extend({
-								templateUrl : 'partials/clients-create.html'
-							}, clientsVars);
-
-							/* Categories Initialization */
-
-							categoriesVars = {
-								controller : 'GenericController',
-								restEntitiesUrl : '/categories',
-								appEntitiesUrl : '/app/categories'
-							};
-
-							categoriesList = $.extend({
-								templateUrl : 'partials/categories-list.html'
-							}, categoriesVars);
-
-							categoriesDetails = $.extend({
-								templateUrl : 'partials/categories-detail.html'
-							}, categoriesVars);
-
-							categoriesCreate = $.extend({
-								templateUrl : 'partials/categories-create.html'
-							}, categoriesVars);
-
-							/* Expenses Initialization */
-
-							expensesVars = {
-								controller : 'GenericController',
-								restEntitiesUrl : '/expenses',
-								appEntitiesUrl : '/app/expenses'
-							};
-
-							expensesList = $.extend({
-								templateUrl : 'partials/expenses-list.html'
-							}, expensesVars);
-
-							expensesDetails = $.extend({
-								templateUrl : 'partials/expenses-detail.html'
-							}, expensesVars);
-
-							expensesCreate = $.extend({
-								templateUrl : 'partials/expenses-create.html'
-							}, expensesVars);
-
-							/* Incomes Initialization */
-
-							incomesVars = {
-								controller : 'GenericController',
-								restEntitiesUrl : '/incomes',
-								appEntitiesUrl : '/app/incomes'
-							};
-
-							incomesList = $.extend({
-								templateUrl : 'partials/incomes-list.html'
-							}, incomesVars);
-
-							incomesDetails = $.extend({
-								templateUrl : 'partials/incomes-detail.html'
-							}, incomesVars);
-
-							incomesCreate = $.extend({
-								templateUrl : 'partials/incomes-create.html'
-							}, incomesVars);
-
-							/* Route */
-
-							$routeProvider.when('/', {
-								templateUrl : 'partials/home.html'
-							}).when('/app/clients', clientsList).when(
-									'/app/clients-detail', clientsDetails)
-									.when('/app/clients-create', clientsCreate)
-									.when('/app/categories', categoriesList)
-									.when('/app/categories-detail',
-											categoriesDetails).when(
-											'/app/categories-create',
-											categoriesCreate).when(
-											'/app/expenses', expensesList)
-									.when('/app/expenses-detail',
-											expensesDetails).when(
-											'/app/expenses-create',
-											expensesCreate).when(
-											'/app/incomes', incomesList).when(
-											'/app/incomes-detail',
-											incomesDetails).when(
-											'/app/incomes-create',
-											incomesCreate).otherwise({
-										redirectTo : '/'
-									});
-						} ]);
+		} ]);
